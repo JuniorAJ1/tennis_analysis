@@ -28,9 +28,9 @@ Precise temporal-spatial calculations for shot events
 Memory-efficient streaming processing of large datasets
 
 Example Usage
-bash
-Copy
+```
 python process_tennis_data.py tournament_matches.zip
+```
 Outputs: tennis_shots_combined.csv with all match data
 
 Use Cases
