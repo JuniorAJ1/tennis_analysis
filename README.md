@@ -42,3 +42,9 @@ Each row = one shot with the following fields:
 
 ```bash
 python tennis_shot_analyzer.py tennisviz_take_home_task_data.zip
+
+## Sample Output
+```
+✅ Done! Combined CSV saved as tennis_shots_combined.csv
+Processed 12 JSON files
+```
