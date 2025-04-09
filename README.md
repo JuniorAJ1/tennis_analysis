@@ -1,44 +1,54 @@
-Tennis Match Data Processor
+🎾 Tennis Shot Analyzer
+A Python tool to process and extract detailed shot-level data from zipped JSON files of tennis match telemetry. The output is a clean, structured CSV with information about each shot, including player positions, ball trajectory, shot type, and more.
 
-A Python script that processes tennis match tracking data from JSON files and generates comprehensive shot-by-shot analytics in CSV format.
+📦 Input Format
+This script expects a .zip archive containing one or more .json files. Each JSON file should follow the tennisviz_take_home_task_data format, containing metadata, player info, shots, events, and ball/player tracking data.
 
-Features
-Batch Processing: Handles multiple match files packaged in a ZIP archive
+🏁 Output
+A single CSV file named tennis_shots_combined.csv containing one row per shot, with the following fields:
 
-Detailed Shot Analysis: Extracts 25+ metrics per shot including:
+Field	Description
+season, tournament_id, draw_code	Match metadata
+set, game, point, serve, rally, shot_no	Sequence context
+hitter_external_id	Unique ID of the player who hit the shot
+stroke	Type of shot (e.g., forehand, backhand)
+spin_type, spin_rpm	Spin data, if available
+speed_ms	Shot speed in meters/second
+call	Line call for the shot (e.g., in, out)
+shot_start_timestamp, shot_end_timestamp	UTC timestamps
+ball_hit_x/y/z	3D position where ball was hit
+ball_bounce_x/y	Position of next bounce after the shot
+hitter_x/y, receiver_x/y	Nearest player positions at the time of the shot
+▶️ Usage
+bash
+Copy
+Edit
+python tennis_shot_analyzer.py tennisviz_take_home_task_data.zip
+Example Output
+javascript
+Copy
+Edit
+✅ Done! Combined CSV saved as tennis_shots_combined.csv  
+Processed 12 JSON files
+🧠 How It Works
+Loads all .json files from the input ZIP.
 
-Ball trajectory (hit position, bounce position)
+For each shot:
 
-Player positions (hitter and receiver coordinates)
+Matches with nearest player positions at time of shot.
 
-Stroke characteristics (spin type, speed, call outcome)
+Identifies ball location at hit and next bounce.
 
-Match context (set, game, point, serve numbers)
+Estimates end timestamp using shot duration.
 
-Command Line Interface: Simple one-command execution
+Writes all extracted data into a single CSV for further analysis.
 
-Data Consolidation: Combines data from multiple matches into a single CSV
+🛠 Requirements
+Python 3.6+
 
-Technical Details
-Processes official tennis match tracking data format
+No external dependencies beyond the standard library.
 
-Handles complex JSON structures with nested event data
+🧪 Tips
+Handles malformed files gracefully.
 
-Precise temporal-spatial calculations for shot events
-
-Memory-efficient streaming processing of large datasets
-
-Example Usage
-```
-python process_tennis_data.py tournament_matches.zip
-```
-Outputs: tennis_shots_combined.csv with all match data
-
-Use Cases
-Tennis analytics platforms
-
-Coach performance analysis tools
-
-Broadcast visualization systems
-
-Player development tracking
+Add your own analytics or visualizations on top of the output CSV.
